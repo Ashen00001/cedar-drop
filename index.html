@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+    <title>Cedar Drop</title>
+    <meta name="description" content="An endless freeride downhill MTB game in the browser." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Barlow:wght@400;500;600;700&display=swap"
+    />
+  </head>
+  <body>
+    <canvas id="c" tabindex="0" aria-label="Cedar Drop game view"></canvas>
+
+    <div class="hud" id="tl">
+      <div class="label">Score</div>
+      <div class="big" id="score">0</div>
+      <div id="combo" hidden>
+        <div class="row"><span id="comboPts">+0</span><span id="mult">×1</span></div>
+        <div id="bar"><i id="barFill"></i></div>
+      </div>
+    </div>
+
+    <div class="hud" id="tr">
+      <div class="big"><span id="speed">0</span><span class="unit">km/h</span></div>
+      <div class="meta"><span id="sign" class="green">●</span><span id="grade">Grade 0%</span></div>
+      <div class="meta" id="dist">0.00 km</div>
+    </div>
+
+    <div id="pops" aria-live="polite"></div>
+    <pre class="hud" id="debug" hidden></pre>
+    <div class="hud" id="hint" hidden>
+      RT pedal · LT brake · hold A, release to hop · left stick flips and spins in the air · right
+      stick tricks · Y respawn · F3 debug
+    </div>
+
+    <div class="panel" id="start">
+      <div class="card">
+        <h1>Cedar<span>/</span>Drop</h1>
+        <p class="lede">
+          One endless mountain and one dirt line down it. Send the kickers, gaps and tables, throw
+          flips and spins, and keep it off the trees.
+        </p>
+        <dl class="keys">
+          <dt>RT / LT</dt>
+          <dd>Pedal and brake. Brake hard while steering to slide</dd>
+          <dt>Left stick</dt>
+          <dd>Steer and lean on the ground. In the air: flip (up/down) and spin (left/right)</dd>
+          <dt>A</dt>
+          <dd>Hold to crouch and pump, let go to hop. Let go at the lip for big air</dd>
+          <dt>Right stick</dt>
+          <dd>
+            Tricks in the air: 8 directions, 8 tweaks. Hold for more points, let go before you land
+          </dd>
+          <dt>Y · Back · Start</dt>
+          <dd>Respawn · camera · pause</dd>
+          <dt>Keyboard</dt>
+          <dd>
+            <kbd>W</kbd> <kbd>S</kbd> pedal/brake (flip in air) · <kbd>A</kbd>
+            <kbd>D</kbd> steer/spin · <kbd>Q</kbd> <kbd>E</kbd> lean · <kbd>Space</kbd> crouch,
+            release to hop · arrows tricks · <kbd>R</kbd> <kbd>C</kbd> <kbd>M</kbd> <kbd>Esc</kbd>
+          </dd>
+        </dl>
+        <p class="tip">
+          Hold A up the ramp and let go right at the lip for big air. Pump the rollers: hold A going
+          up, let go on the back side. Land crouched and pointed where you're going. F3 shows the
+          controller debug readout.
+        </p>
+        <div class="actions">
+          <button class="go" id="go">Drop in</button>
+          <label class="opt"><input type="checkbox" id="lowq" /> Low graphics</label>
+          <span class="best" id="best"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" id="pause" hidden>
+      <div class="card">
+        <h1>Paused</h1>
+        <p class="lede" id="pauseStats"></p>
+        <div class="actions">
+          <button class="go" id="resume">Keep riding</button>
+          <button class="go" id="restart" style="background: var(--ink)">New run</button>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
