@@ -211,10 +211,12 @@ function autopilot(i: Inputs) {
 }
 
 const STEP = 0.01;
+let frames = 0;
 let last = performance.now(),
   acc = 0;
 function frame(now: number) {
   requestAnimationFrame(frame);
+  frames++;
   const dt = Math.min(0.05, (now - last) / 1000);
   last = now;
   const inp = input.read(dt);
@@ -275,3 +277,15 @@ function frame(now: number) {
   renderer.render(scene, camera);
 }
 requestAnimationFrame(frame);
+declare global {
+  interface Window {
+    __cedar?: () => {
+      frames: number;
+      running: boolean;
+      paused: boolean;
+      dist: number;
+      speed: number;
+    };
+  }
+}
+window.__cedar = () => ({ frames, running, paused, dist: S.dist, speed: speedOf(bike) });
